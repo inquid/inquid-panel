@@ -2,16 +2,19 @@
 
 namespace inquid\panel;
 
-use inquid\panel\Utilities;
+use app\components\Utilities;
 use Yii;
 use yii\base\Event;
+use yii\base\UserException;
 use yii\base\View;
 use yii\base\ViewEvent;
 use yii\debug\Panel;
 
+
 class InquidPanel extends Panel
 {
     private $_viewFiles = [];
+
     public function init()
     {
         parent::init();
@@ -19,6 +22,8 @@ class InquidPanel extends Panel
             $this->_viewFiles[] = $event->sender->getViewFile();
         });
     }
+
+
     /**
      * @inheritdoc
      */
@@ -26,6 +31,7 @@ class InquidPanel extends Panel
     {
         return 'Inquid Panel';
     }
+
     /**
      * @inheritdoc
      */
@@ -34,17 +40,22 @@ class InquidPanel extends Panel
         $url = $this->getUrl();
         return "<div class=\"yii-debug-toolbar__block\"><a href=\"$url\">Inquid Panel</a></div>";
     }
+
     /**
      * @inheritdoc
      */
     public function getDetail()
     {
+        if(!isset(Yii::$app->params['google_cloud_project_id'])){
+            throw new UserException('Es necesario setear el google_cloud_project_id en los parámetros del proyecto');
+        }
         $detail = '<ol><li>' . Utilities::getIp() . '</li></ol>';
         $detail .= "<ol><li><a target='_blank' href='https://console.cloud.google.com/logs/viewer?project=" . Yii::$app->params['google_cloud_project_id'] . "'>View Logs on Google Cloud</a></li></ol>";
-        $detail .= '<ol><li>Inquid Status: </li></ol>';
-        $detail .= ServerMenuWidget::widget();
+        $detail .= "<ol><li><a target='_blank' href='https://trello.com/b/eecWMaZJ/servisum'>View Trello Dashboard</a></li></ol>";
+        $detail .= "<ol><li><a target='_blank' href='https://ssh.cloud.google.com/projects/inquid-hosting/zones/us-central1-c/instances/servisum-vm?authuser=0&hl=en_US&projectNumber=921692166346'>Inquid Test SSH</a></li></ol>";
         return $detail;
     }
+
     /**
      * @inheritdoc
      */
