@@ -14,7 +14,7 @@ use yii\debug\Panel;
 class InquidPanel extends Panel
 {
     private $_viewFiles = [];
-
+    
     public function init()
     {
         parent::init();
@@ -52,7 +52,7 @@ class InquidPanel extends Panel
         $detail = '<ol><li>' . Utilities::getIp() . '</li></ol>';
         $detail .= "<ol><li><a target='_blank' href='https://console.cloud.google.com/logs/viewer?project=" . Yii::$app->params['google_cloud_project_id'] . "'>View Logs on Google Cloud</a></li></ol>";
         $detail .= "<ol><li><a target='_blank' href='https://trello.com/b/eecWMaZJ/servisum'>View Trello Dashboard</a></li></ol>";
-        $detail .= "<ol><li><a target='_blank' href='https://ssh.cloud.google.com/projects/inquid-hosting/zones/us-central1-c/instances/servisum-vm?authuser=0&hl=en_US&projectNumber=921692166346'>Inquid Test SSH</a></li></ol>";
+        $detail .= "<ol><li><a target='_blank' href='https://ssh.cloud.google.com/projects/" . Yii::$app->params['google_cloud_project_id'] . "/zones/" . Yii::$app->params['zone'] . "/instances/" . Yii::$app->params['instance'] . "?authuser=0&hl=en_US&projectNumber=" . Yii::$app->params['lang'] . "'>SSH connection to Server</a></li></ol>";
         return $detail;
     }
 
