@@ -48,6 +48,22 @@ Once the extension is installed, simply add the configuration to the debug confi
     ];
 ```
 
+you also need to set in your params file this settings:
+```php
+return [
+    ...
+    'google_cloud_project_id' => '',
+    'google_cloud_project_zone'=>'us-central1-c',
+    'google_cloud_project_instance'=>'your-vm',
+    'google_cloud_project_lang'=>'en_US',
+    'google_cloud_project_number'=>'your-project-number',
+    'trello_url'=>'/b/board-id/board-name',
+    ...
+];
+```
+
+
+
 And thats it! Check the panel at the Debug Toolbar
 
 And check them in https://console.cloud.google.com/logs/viewer?project=your_project_id
