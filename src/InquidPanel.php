@@ -50,9 +50,12 @@ class InquidPanel extends Panel
         if(!isset(Yii::$app->params['google_cloud_project_id'])){
             throw new UserException('Es necesario setear el google_cloud_project_id en los parámetros del proyecto');
         }
+
         $detail = '<ol><li>' . Utilities::getIp() . '</li>';
         $detail .= "<li><a target='_blank' href='https://console.cloud.google.com/logs/viewer?project=" . Yii::$app->params['google_cloud_project_id'] . "'>View Logs on Google Cloud</a></li>";
-        $detail .= "<li><a target='_blank' href='https://trello.com/" . Html::encode(Yii::$app->params['trello_url']) . "'>View Trello Dashboard</a></li>";
+        if(!isset(Yii::$app->params['trello_url'])){
+            $detail .= "<li><a target='_blank' href='https://trello.com/" . Html::encode(Yii::$app->params['trello_url']) . "'>View Trello Dashboard</a></li>";
+        }
         $detail .= "<li><a target='_blank' href='https://ssh.cloud.google.com/projects/" . Yii::$app->params['google_cloud_project_id'] . "/zones/" . Yii::$app->params['google_cloud_project_zone'] . "/instances/" . Yii::$app->params['google_cloud_project_instance'] . "?authuser=0&hl=" . Yii::$app->params['google_cloud_project_lang'] . "&projectNumber=" . Yii::$app->params['google_cloud_project_number'] . "'>SSH connection to Server</a></li>";
         return $detail;
     }
