@@ -2,7 +2,7 @@
 
 namespace inquid\panel;
 
-use app\components\Utilities;
+use inquid\panel\Utilities;
 use Yii;
 use yii\base\Event;
 use yii\base\UserException;
